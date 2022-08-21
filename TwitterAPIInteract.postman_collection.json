@@ -1,0 +1,1578 @@
+{
+	"info": {
+		"_postman_id": "6383b635-c326-4247-95ce-1eaaf4cfcacc",
+		"name": "TwitterAPIInteract",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22133355"
+	},
+	"item": [
+		{
+			"name": "negative_scenarios",
+			"item": [
+				{
+					"name": "GET users/by/username/$USERNAME api with no bearer auth token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"     pm.response.to.have.status(401)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with not support http method POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with no username value provided",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"     pm.response.to.have.status(404)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with not support http method DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with user.fields have valid query param,tweet.fields validhave query param and expansions have invalid query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 400){\r",
+									"        pm.response.to.have.status(400);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.title).equals(\"Invalid Request\")\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(400).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at,conversation_id&user.fields=verified,created_at&expansions=pinned_twee34t_id",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at,conversation_id"
+								},
+								{
+									"key": "user.fields",
+									"value": "verified,created_at"
+								},
+								{
+									"key": "expansions",
+									"value": "pinned_twee34t_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with not support http method PUT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME api with invalid bearer auth token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"     pm.response.to.have.status(401)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "werrgujgjgm67",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with api version lower than current version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 403){\r",
+									"        pm.response.to.have.status(403);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.errors[0]['message']).contains(\"which includes access to Twitter API v2 endpoints only\")\r",
+									"        pm.expect(jsonData.errors[0]['code']).equals(453)\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(403).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION_LOWER_VERSION_THAN_CURRENT_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION_LOWER_VERSION_THAN_CURRENT_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with api version higher than current version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"     pm.response.to.have.status(404)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION_HIGHER_VERSION_THAN_CURRENT_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION_HIGHER_VERSION_THAN_CURRENT_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with invalid username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 400){\r",
+									"        pm.response.to.have.status(400);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.title).equals(\"Invalid Request\")\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(400).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME_INVALID}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME_INVALID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields have one valid query param and invalid query param and user.fields have  valid query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 400){\r",
+									"        pm.response.to.have.status(400);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.title).equals(\"Invalid Request\")\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(400).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at,conversation34_id&user.fields=verified,created_at",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at,conversation34_id"
+								},
+								{
+									"key": "user.fields",
+									"value": "verified,created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with user.fields have one valid query param and invalid query param and tweet.fields have valid query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 400){\r",
+									"        pm.response.to.have.status(400);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.title).equals(\"Invalid Request\")\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(400).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at,conversation_id&user.fields=verified,created_a34t",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at,conversation_id"
+								},
+								{
+									"key": "user.fields",
+									"value": "verified,created_a34t"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with username not available",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.errors).to.be.an(\"array\")\r",
+									"\r",
+									"        pm.expect(jsonData.errors[0]['detail']).equals(\"User has been suspended: [nOtVaLiD].\")\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME_NOT_AVAILABLE}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME_NOT_AVAILABLE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with invalid api path",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"     pm.response.to.have.status(404)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/user/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"user",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "positive_scenarios",
+			"item": [
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields,expansions and user.fields multiple query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        \r",
+									"        pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.verified).to.be.false;\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"// pm.test(\"Your test name\", function () {\r",
+									"//     const jsonData = pm.response.json();\r",
+									"//     console.log()\r",
+									"//     pm.expect(jsonData.username).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"// });\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at,conversation_id,geo,lang&user.fields=verified,created_at&expansions=pinned_tweet_id",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at,conversation_id,geo,lang"
+								},
+								{
+									"key": "user.fields",
+									"value": "verified,created_at"
+								},
+								{
+									"key": "expansions",
+									"value": "pinned_tweet_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME have tweet.fields and expansions query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"        \r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at,conversation_id&expansions=pinned_tweet_id",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at,conversation_id"
+								},
+								{
+									"key": "expansions",
+									"value": "pinned_tweet_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with expansions and user.fields query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.verified).to.be.false;\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?user.fields=verified&expansions=pinned_tweet_id",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "user.fields",
+									"value": "verified"
+								},
+								{
+									"key": "expansions",
+									"value": "pinned_tweet_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields and user.fields query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.verified).to.be.false;\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=conversation_id&user.fields=verified",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "conversation_id"
+								},
+								{
+									"key": "user.fields",
+									"value": "verified"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME without query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME have only tweet.fields query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME have only user.fields query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        \r",
+									"        pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.verified).to.be.false;\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?user.fields=verified,created_at",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "user.fields",
+									"value": "verified,created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields query params mentioned empty and user.fields query params have value",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        \r",
+									"        pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=&user.fields=created_at",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": ""
+								},
+								{
+									"key": "user.fields",
+									"value": "created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields,user.fields query params mentioned have values and expansions query params is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        \r",
+									"        pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.verified).to.be.false;\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at&user.fields=created_at,verified&expansions=",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at"
+								},
+								{
+									"key": "user.fields",
+									"value": "created_at,verified"
+								},
+								{
+									"key": "expansions",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME with tweet.fields query params mentioned have values and user.fields query params is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?tweet.fields=created_at&user.fields=",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "tweet.fields",
+									"value": "created_at"
+								},
+								{
+									"key": "user.fields",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET users/by/username/$USERNAME have only expansion query params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 and verify response params\", function () {\r",
+									"    console.log(`Response Status code is ${pm.response.code}`)\r",
+									"    if (pm.response.code === 200){\r",
+									"        pm.response.to.have.status(200);\r",
+									"        const jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData).not.to.be.empty\r",
+									"        pm.expect(jsonData.data).to.be.an(\"object\")\r",
+									"\r",
+									"        pm.expect(jsonData.data.id).to.be.a(\"string\");\r",
+									"        pm.expect(jsonData.data.username).equals(pm.environment.get(\"TWITTER_USERNAME\"));\r",
+									"        pm.expect(jsonData.data.name).equals(pm.environment.get(\"TWITTER_PROFILE_NAME\"));\r",
+									"\r",
+									"    }else{\r",
+									"        console.log(`Response Status code is ${pm.response.code}`)\r",
+									"        pm.expect(200).equals(pm.response.code)\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TWITTER_BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TWITTER_ENV_URL}}/{{TWITTER_API_VERSION}}/users/by/username/{{TWITTER_USERNAME}}?expansions=pinned_tweet_id",
+							"host": [
+								"{{TWITTER_ENV_URL}}"
+							],
+							"path": [
+								"{{TWITTER_API_VERSION}}",
+								"users",
+								"by",
+								"username",
+								"{{TWITTER_USERNAME}}"
+							],
+							"query": [
+								{
+									"key": "expansions",
+									"value": "pinned_tweet_id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
